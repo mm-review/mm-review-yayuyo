@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -191,7 +191,17 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
+  <script>
+    const SUPABASE_URL  = 'https://egbmjdtabuzralrepdcd.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYm1qZHRhYnV6cmFscmVwZGNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3MDQzMTUsImV4cCI6MjA5NjI4MDMxNX0.y7G_h_hk9ypnITL-VkALJy25vmtk14_zd1E7VxPrbIU';
+    const CATEGORIES = [
+      { key: 'suiri',     label: '推理' },
+      { key: 'roleplay',  label: 'ロールプレイの楽しさ' },
+      { key: 'design',    label: 'デザイン' },
+      { key: 'gimmick',   label: 'ギミック' },
+      { key: 'character', label: 'キャラクター' },
+    ];
+  </script>
   <script>
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
     let editingId = null;
@@ -329,3 +339,4 @@
   </script>
 </body>
 </html>
+
