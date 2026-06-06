@@ -219,8 +219,16 @@
           <div class="join-msg" id="msg-${s.id}"></div>
         </div>`;
 
+      const imageHTML = s.og_image_url
+        ? `<div style="overflow:hidden;max-height:180px;">
+             <img src="${esc(s.og_image_url)}" alt="${esc(s.scenario_name)}"
+               style="width:100%;height:180px;object-fit:cover;display:block;">
+           </div>`
+        : '';
+
       return `
         <div class="recruit-card" id="card-${s.id}">
+          ${imageHTML}
           <div class="recruit-header">
             <div class="recruit-title">🎭 ${esc(s.scenario_name)}${fullBadge}</div>
             <div class="recruit-meta">

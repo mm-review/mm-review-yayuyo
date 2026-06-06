@@ -168,18 +168,18 @@ function _createGroupCard(group, activeKeys) {
     </div>` : '';
 
   // OG画像（画像あり：カード上部にワイド表示）
-  const ogImgHTML = r0.ogImageUrl
-    ? `<div style="margin:-1.2rem -1.5rem 1rem;overflow:hidden;">
-         <img src="${escHtml(r0.ogImageUrl)}" alt="${escHtml(r0.title)}"
-           style="width:100%;aspect-ratio:1200/630;object-fit:cover;display:block;">
-       </div>`
-    : '';
+  if (r0.ogImageUrl) {
+    const imgWrap = document.createElement('div');
+    imgWrap.style.cssText = 'overflow:hidden;max-height:200px;';
+    imgWrap.innerHTML = `<img src="${escHtml(r0.ogImageUrl)}" alt="${escHtml(r0.title)}"
+      style="width:100%;height:200px;object-fit:cover;display:block;">`;
+    card.appendChild(imgWrap);
+  }
 
   const staticHead = document.createElement('div');
   staticHead.className = 'card-static-header';
   staticHead.style.cssText = 'display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;';
   staticHead.innerHTML = `
-    ${ogImgHTML}
     <div style="flex:1;min-width:0;">
       <div class="card-title">${escHtml(r0.title)}</div>
       ${r0.boothUrl

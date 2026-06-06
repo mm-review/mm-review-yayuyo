@@ -116,6 +116,10 @@
         <input type="text" id="f-booth" placeholder="https://booth.pm/...">
       </div>
       <div class="form-row">
+        <label>画像URL（任意）</label>
+        <input type="text" id="f-image" placeholder="https://...">
+      </div>
+      <div class="form-row">
         <label>コメント（任意）</label>
         <textarea id="f-comment" rows="3" placeholder="募集に関するひとことなど"></textarea>
       </div>
@@ -182,16 +186,17 @@
       const capacity = parseInt(document.getElementById('f-capacity').value, 10);
       const gm       = document.getElementById('f-gm').value.trim();
       const booth    = document.getElementById('f-booth').value.trim();
+      const image    = document.getElementById('f-image').value.trim();
       const comment  = document.getElementById('f-comment').value.trim();
       const msg      = document.getElementById('create-msg');
       if (!scenario) { msg.textContent = '⚠️ シナリオ名を入力してください'; return; }
       if (!capacity || capacity < 1) { msg.textContent = '⚠️ 定員を入力してください'; return; }
       const { error } = await db.from('recruit_sessions').insert({
-        scenario_name: scenario, capacity, gm_name: gm || null, booth_url: booth || null, comment: comment || null, is_full: false
+        scenario_name: scenario, capacity, gm_name: gm || null, booth_url: booth || null, og_image_url: image || null, comment: comment || null, is_full: false
       });
       if (error) { msg.textContent = '❌ ' + error.message; return; }
       msg.textContent = '✅ 作成しました！';
-      ['f-scenario','f-gm','f-booth','f-comment'].forEach(id => { document.getElementById(id).value = ''; });
+      ['f-scenario','f-gm','f-booth','f-image','f-comment'].forEach(id => { document.getElementById(id).value = ''; });
       document.getElementById('f-capacity').value = '4';
       await load();
       setTimeout(() => { msg.textContent = ''; }, 3000);
